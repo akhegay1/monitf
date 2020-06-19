@@ -1,0 +1,12 @@
+.spanaction {
+  display: inline-block;
+  width: 180px;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
+
+.textarea {
+  width: 500px;
+  height: 150px;
+}
