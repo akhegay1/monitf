@@ -1,5 +1,4 @@
 # monitf
-
 Monitoring tool logically consists of three parts:
 
 1.Database containing hosts, types of metrics, metrics, time series of metrics,  authorized users, passwords.
@@ -15,4 +14,3 @@ Monitoring tool logically consists of three parts:
 	
 	Backend is implemented as Golang microservices, Source code in repository monitw. 
 	Fronted is implemented using React. Source code in repository monitf.
-	
