@@ -7,13 +7,15 @@ import cn from "classnames";
 import { ctimeout } from "../../params.js";
 import { baseurl } from "../../params.js";
 import Alert from "../Alert/Alert";
-
+//1111222
 function Monitors() {
   const vappcontext = useContext(appcontext);
   let [vmetricserr, setVmetricserr] = useState("");
   const [tmetric, setTmetric] = useState(vappcontext.vTmetricMon);
+  const [srvgrp, setSrvgrp] = useState(vappcontext.vSrvgrpMon);
 
   const [sTmetrics, setStmetrics] = useState([]);
+  const [sSrvgrps, setSrvgrps] = useState([]);
 
   const fetchStmetrics = async () => {
     let url = `${baseurl}stmetrics`;
@@ -29,10 +31,24 @@ function Monitors() {
     return result;
   };
 
+  const fetchSsrvgrps = async () => {
+    let url = `${baseurl}ssrvgrps`;
+    const result = await axios(url, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+      timeout: ctimeout,
+    }).catch((error) => {
+      console.log("fetchSsrvgrps " + error.message);
+      return { data: [{ err: error.message }] };
+    });
+    return result;
+  };
+
   const fetchVmetrics = async () => {
     console.log("start fetchVmetrics ");
 
-    let url = `${baseurl}vmetrics?tm=${tmetric}`;
+    let url = `${baseurl}vmetrics?tm=${tmetric}&sg=${srvgrp}`;
 
     const result = await axios(url, {
       headers: {
@@ -56,12 +72,13 @@ function Monitors() {
 
   function fetchVmetricsA() {
     fetchStmetrics().then((result) => setStmetrics(result.data));
+    fetchSsrvgrps().then((result) => setSrvgrps(result.data));
     fetchVmetrics().then((result) => vappcontext.pSetVmetrics(result.data));
     clearInterval(vappcontext.vInterval);
     var interval = setInterval(
       () =>
         fetchVmetrics().then((result) => vappcontext.pSetVmetrics(result.data)),
-      10000
+      80000
     );
 
     vappcontext.pSetInterval(interval);
@@ -80,23 +97,36 @@ function Monitors() {
   vappcontext.vVmetrics.sort(compare);
   */
 
-  function squareColor(val, warn, err, execerr) {
+  function squareColor(val, warn, err, execerr, tresholdismin) {
+    console.log(tresholdismin);
     if (execerr) {
       return cn(b.square, b.sqgrey);
-    } else if (val > err && err !== 0) {
-      return cn(b.square, b.sqred);
-    } else if (val < err && val > warn && warn !== 0 && err !== 0) {
-      return cn(b.square, b.sqorange);
     } else {
-      return cn(b.square, b.sqgreen);
+      if (tresholdismin === true) {
+        if (val < err && err !== 0) {
+          return cn(b.square, b.sqred);
+        } else if (val > err && val < warn && warn !== 0 && err !== 0) {
+          return cn(b.square, b.sqorange);
+        } else {
+          return cn(b.square, b.sqgreen);
+        }
+      } else {
+        if (val > err && err !== 0) {
+          return cn(b.square, b.sqred);
+        } else if (val < err && val > warn && warn !== 0 && err !== 0) {
+          return cn(b.square, b.sqorange);
+        } else {
+          return cn(b.square, b.sqgreen);
+        }
+      }
     }
   }
 
   useEffect(() => {
     fetchVmetricsA(); // using camelCase for variable name is recommended.
-  }, [tmetric]);
+  }, [tmetric, srvgrp]);
 
-  console.log("vappcontext.vTmetricMon apivmetricserr " + apivmetricserr);
+  //console.log("vappcontext.vTmetricMon apivmetricserr " + apivmetricserr);
 
   return (
     <div>
@@ -113,7 +143,6 @@ function Monitors() {
           );
         }
       })()}
-
       <div
         className={cn(a.flexcontainer, a.flexcontainerstart, b.bottomborder)}
       >
@@ -136,7 +165,29 @@ function Monitors() {
         ))}
       </div>
 
-      <div className={cn(a.flexcontainer, a.flexcntnrspacebtwen)}>
+      <div
+        className={cn(a.flexcontainer, a.flexcontainerstart, b.bottomborder)}
+      >
+        {sSrvgrps.map((item) => (
+          <div className={b.tab} key={item.Id}>
+            <div
+              className={
+                vappcontext.vSrvgrpMon === item.Id
+                  ? cn(b.btnactive, b.btn)
+                  : b.btn
+              }
+              onClick={() => {
+                setSrvgrp(item.Id);
+                vappcontext.pSetSrvgrpMon(item.Id);
+              }}
+            >
+              {item.Grpname}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className={cn(a.flexcontainer, a.flexcntnrspacebtwen, a.flexwrap)}>
         {vappcontext.vVmetrics.map((item) => (
           <div className={cn(b.holder, b.tab)} key={item.Id}>
             <div
@@ -144,7 +195,8 @@ function Monitors() {
                 item.Value,
                 item.Warning,
                 item.Error,
-                item.Execerr
+                item.Execerr,
+                item.Tresholdismin
               )}
               key={item.Id}
               onClick={() => {
