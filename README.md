@@ -11,6 +11,6 @@ Monitoring tool logically consists of three parts:
 	
 	3.2.Monitor current state of servers metrics and view the history of metrc values.
 	
-	
+	Service collecting metrics is imeplemented using Golang, Source code in repository monit. 
 	Backend is implemented as Golang microservices, Source code in repository monitw. 
 	Fronted is implemented using React. Source code in repository monitf.
