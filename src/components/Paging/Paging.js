@@ -21,7 +21,7 @@ function Paging(props) {
     <div className={cn(b.flexcontainercenter, b.flexcontainercenter)}>
       <ul className={a.pages}>
         {(() => {
-          if (props.pn > 5) {
+          if (props.pn > 1) {
             return (
               <a
                 href="/#"
@@ -37,18 +37,33 @@ function Paging(props) {
         {btnsArr.map((item, index) => (
           <li key={item} className={a.pagenum}>
             {(() => {
-              if ((props.pn > 5 && item !== 3) || props.pn <= 5) {
+              if (props.pn <= 5) {
+                //если номер страницы меньше или равно 5 то выводим номера страниц от 1 до 5
+                if (props.pn !== item) {
+                  return (
+                    <a
+                      href="/#"
+                      onClick={() => {
+                        setPnRp("pn", item); //при клике записываем в глобальный стейт номер выбранной страницы
+                      }}
+                    >
+                      {item}
+                    </a>
+                  );
+                } else return item; //если текущий номер страницы совпадает с item, то выводим просто номер страницы без подчеркивания
+              } else if (props.pn !== item + props.pn - 5) {
+                //если номер страницы больше 5 то надо добавить разницу между текущим номером страницы и 5, чтобы вывелись другие номера страниц, например 2,3,4,5,6
                 return (
                   <a
                     href="/#"
                     onClick={() => {
-                      setPnRp("pn", item); //при клике записываем в глобальный стейт номер выбранной страницы
+                      setPnRp("pn", item + props.pn - 5); //при клике записываем в глобальный стейт номер выбранной страницы
                     }}
                   >
-                    {item}
+                    {item + props.pn - 5}
                   </a>
                 );
-              } else return <span>..</span>;
+              } else return item + props.pn - 5;
             })()}
           </li>
         ))}
@@ -61,6 +76,16 @@ function Paging(props) {
           Next&gt;&gt;
         </a>
         <li className={a.pagenum}>Rows On page:</li>
+        <li className={a.pagenum}>
+          <a
+            href="/#"
+            onClick={() => {
+              setPnRp("rp", 5); //при клике записываем в глобальный стейт кл-во записей на странице
+            }}
+          >
+            5
+          </a>
+        </li>
         <li className={a.pagenum}>
           <a
             href="/#"
@@ -93,6 +118,8 @@ function Paging(props) {
           </a>
         </li>
       </ul>
+      <br />
+      <br />
     </div>
   );
 }
