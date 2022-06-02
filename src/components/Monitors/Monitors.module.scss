@@ -1,0 +1,79 @@
+.square {
+  width: 80px;
+  height: 80px;
+  margin: 5px;
+}
+.sqgreen {
+  background: green;
+}
+
+.sqorange {
+  background: orange;
+}
+
+.sqred {
+  background: red;
+}
+.sqgrey {
+  background: grey;
+}
+
+.text {
+  color: #fff;
+}
+
+.tab {
+  margin-top: 10px;
+  margin-top: 10px;
+}
+
+.btn {
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  background-color: #868cdb;
+  border-style: none;
+  height: 25px;
+  width: 70px;
+  padding-top: 3px;
+  border-radius: 10px 10px 0 0;
+}
+
+.btndisabled {
+  color: grey;
+}
+
+/*.btn:hover {
+  background-color: #ccc;
+  height: 40px;
+}
+*/
+
+.btnactive {
+  background-color: #868cdb;
+  color: white;
+}
+
+.bottomborder {
+  border-bottom: 1px solid;
+  border-bottom-color: #ccc;
+}
+
+.holder {
+  position: relative;
+}
+.block {
+  position: absolute;
+  top: 0%;
+  left: 100%;
+  background: grey;
+  padding: 5px;
+  display: none;
+}
+.holder:hover .block {
+  display: block;
+}
+
+.label {
+  font-size: 12px;
+}

@@ -1,0 +1,46 @@
+.topmenubackcolor {
+  background-color: white;
+  background-image: linear-gradient(to right, white, #5e68db);
+}
+
+.btntransparent {
+  background-color: Transparent;
+}
+
+.topmenutext {
+  font-weight: bold;
+}
+
+.dropbtn {
+  padding: 16px;
+  font-size: 16px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdowncontent {
+  display: none;
+  position: absolute;
+  background-color: #868cdb;
+  min-width: 80px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdowncontent_a {
+  color: black;
+  padding: 7px 7px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdowncontent_a:hover {
+  background-color: #bbbdd6;
+}
+
+.dropdown:hover .dropdowncontent {
+  display: block;
+}

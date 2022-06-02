@@ -1,0 +1,159 @@
+.btn {
+  border-style: none;
+  display: inline;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  font-size: 15px;
+  background-color: #868cdb;
+}
+
+.btnbordernone {
+  border-style: none;
+}
+
+.btnoper {
+  height: 35px;
+  font-size: 15px;
+  background-color: #868cdb;
+  text-align: center;
+}
+
+.btnoperarr {
+  height: 35px;
+  width: 80px;
+  font-size: 15px;
+  background-color: #868cdb;
+  text-align: center;
+}
+
+.btndisabled {
+  color: grey;
+}
+
+.btn:hover {
+  background-color: #bbbdd6;
+}
+
+.btnactive {
+  display: inline;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: white;
+  font-size: 15px;
+  border-style: none;
+  background-color: #242a70;
+}
+
+.tablerows {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 80%;
+  border: 1px solid #ddd;
+  margin: 8px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tablenamevalue {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 95%;
+  border: 1px solid #ddd;
+  margin: 8px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.tdcenter {
+  text-align: center;
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.headerrow {
+  background-color: #868cdb;
+}
+
+.notfirst:hover {
+  background-color: #e6e6e6;
+}
+
+.selectedrow {
+  background-color: #cbcef5;
+}
+.unselectedrow {
+  background-color: #ffffff;
+}
+
+.flexcontainer {
+  display: flex;
+  flex-direction: row;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.flexcontainervert {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 200px;
+  align-items: center;
+}
+
+.flexcontainerstart {
+  justify-content: flex-start;
+}
+.flexcontainerend {
+  justify-content: flex-end;
+}
+
+.flexcontainercenter {
+  justify-content: center;
+}
+.flexcntnrspacebtwen {
+  justify-content: space-around;
+}
+.flexcontainercol {
+  flex-direction: column;
+}
+
+.fltr {
+  padding: 10px;
+}
+
+.flexcfltr {
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+}
+
+.flexcfltrm {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+}
+.algncenter {
+  display: flex;
+  align-items: center;
+}
+
+.flexbackcolor {
+  background-color: #f2f2f2;
+}
+.flexwrap {
+  flex-wrap: wrap;
+}
+
+.flexcontainerwidth {
+  width: 80%;
+}
